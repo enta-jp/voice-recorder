@@ -63,6 +63,13 @@
         0%, 100% { opacity: 1; }
         50% { opacity: 0.6; }
     }
+    
+    /* Safe area for iPhone notch/home indicator */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+        .safe-bottom {
+            padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
+        }
+    }
 </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display overflow-x-hidden touch-manipulation">
@@ -134,7 +141,7 @@
     </div>
     
     <!-- Main Action Area -->
-    <div class="flex-1 flex items-center justify-center py-6 min-h-[200px]">
+    <div class="flex-1 flex items-center justify-center py-6 min-h-[180px]">
         <div class="relative flex items-center justify-center">
             <div id="ring1" class="absolute inset-0 bg-primary/10 dark:bg-primary/20 rounded-full scale-125 transition-all duration-300"></div>
             <div id="ring2" class="absolute inset-0 bg-primary/20 dark:bg-primary/30 rounded-full scale-110 transition-all duration-300"></div>
@@ -144,8 +151,8 @@
         </div>
     </div>
     
-    <!-- Bottom Action Bar -->
-    <div class="p-6 pb-10 w-full bg-transparent">
+    <!-- Bottom Action Bar - 修正: pb-10 → pb-20 で約1cm上に移動 -->
+    <div class="p-6 pb-20 safe-bottom w-full bg-transparent">
         <button id="uploadBtn" class="w-full h-14 rounded-full bg-[#e5e7eb] dark:bg-[#2a3845] text-[#9ca3af] dark:text-[#637588] font-bold text-base tracking-[0.015em] flex items-center justify-center gap-3 cursor-not-allowed transition-all duration-300" disabled>
             <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
             <span id="uploadText">ドライブへ送信</span>
